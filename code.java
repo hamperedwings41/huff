@@ -1,16 +1,51 @@
 import java.util.*;
 
-public class code {
 
+public class code {
 	
-	//take 2 smallest frequencies
-	//add them together/
-	// add them to the bst
-	//do until there is only one 
+	Node root; 
+	
+	Scanner in;
+	
+	public code ()
+	{
+		root = null;
+		in = new Scanner(System.in);
+	}
+	
+	static void count( String a)
+	{
+	
+	}
 	
 	
 	
-	//                      10:*
-	//                     /  \
-	//                    5:1  5:2
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	private class Node
+	{
+		Comparable data;
+		Node left;
+		Node right;
+
+		public Node( Comparable v, Node l, Node r)
+		{
+			data = v;
+			left = l;
+			right = r;
+		}
+		
+		public String toString()
+		{
+			return "" + data + " " + left + " " + right;
+		}
+	}
 }
