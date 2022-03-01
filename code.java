@@ -1,21 +1,42 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
-
-
-public class code {
+	public class code {
 	
 	Node root; 
 	
-	Scanner in;
+	PriorityQueue<Node> count = new PriorityQueue<Node>();
+	String bob;
+	Scanner in = new Scanner(System.in);
 	
-	public code ()
+	public code () throws FileNotFoundException
 	{
 		root = null;
-		in = new Scanner(System.in);
+		bob = in.next();
+	    Scanner in = new Scanner( new File("tiny.txt"));
 	}
 	
-	static void count( String a)
+	public void count( String a, Node t)
 	{
-	
+		int m = 0;
+		String[] arr = bob.split("");
+		for(int x = 0; x<arr.length;x++)
+		{
+			char r=arr[x].charAt(0);
+			if(!count.contains(t.data))
+			{
+				m = 1;
+				count.add(new Node (r, m, null, null));	
+			}
+			else if(count.contains(t.data))
+			{
+				m = t.cnt;
+				count.remove(t.data);
+				count.add(new Node (r, m++, null, null));	
+			}
+		}
+		System.out.println(count);
+
 	}
 	
 	
@@ -24,23 +45,19 @@ public class code {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	private class Node
+	class Node
 	{
-		Comparable data;
+		char data;
 		Node left;
 		Node right;
+		int cnt;
 
-		public Node( Comparable v, Node l, Node r)
+		public Node( char v, int c, Node l, Node r)
 		{
 			data = v;
 			left = l;
 			right = r;
+			cnt = c;
 		}
 		
 		public String toString()
