@@ -4,21 +4,20 @@ public class HuffmanCode {
 	
 	HuffmanNode root;
 	Queue<HuffmanNode> queue;
-	Scanner in;
-	String bob;
+	//Scanner in;
 	
 	public HuffmanCode()
 	{
 		root = null;
 		queue = new PriorityQueue<HuffmanNode>();
-		in = new Scanner(System.in);
-		bob = in.next();
+		//in = new Scanner(System.in);
 	}
 	
-	public void getFreq( String s )
+	public Queue<HuffmanNode> getFreq( String s )
 	{
 		int count[] = new int[256];
 		int len = s.length();
+		Queue<HuffmanNode> q = new PriorityQueue<HuffmanNode>();
 		
 		for (int i = 0; i < len; i++)
 			count[s.charAt(i)]++;
@@ -34,9 +33,19 @@ public class HuffmanCode {
 			}
 			
 			if(find == 1)
-				queue.add(new HuffmanNode(s.charAt(i), count[s.charAt(i)], null, null));
+				q.add(new HuffmanNode(s.charAt(i), count[s.charAt(i)], null, null));
         }
 		
+		return q;
+	}
+	
+	public static void main(String[] args)
+	{
+		HuffmanCode c = new HuffmanCode();
+		Queue<HuffmanNode> y = new PriorityQueue<HuffmanNode>();
+		y = c.getFreq( "aba ab cabbb" );
+		for (int i = 0; i < 4; i++)	// i don't know how to print queues bruh
+			System.out.println( y.poll() );
 	}
 	
 }
