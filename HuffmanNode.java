@@ -16,7 +16,14 @@ public class HuffmanNode implements Comparable<HuffmanNode>
 		right = r;
 		s = Character.toString(cha);
 	}
-	
+	public HuffmanNode( int f, HuffmanNode l, HuffmanNode r)
+	{
+		cha = (Character) null;
+		freq = f;
+		left = l;
+		right = r;
+		s = Character.toString(cha);
+	}
 	
 	public int compareTo( HuffmanNode other )
 	{

@@ -39,6 +39,32 @@ public class HuffmanCode {
 		return q;
 	}
 	
+	public HuffmanNode makeTree( Queue<HuffmanNode> q )
+	{
+		if( !q.isEmpty() )
+		{
+			HuffmanNode o = q.poll();
+			if( q.peek()==null )
+				return makeTree( o, 0 );
+			else
+				return makeTree( q.poll(), o, 0 );
+		}
+		else
+			return null;
+	}
+	private HuffmanNode makeTree( HuffmanNode r, int sum )
+	{
+		HuffmanNode c = new HuffmanNode(r.freq+sum, makeTree(r, r.freq+sum), r);
+		return r;
+		
+	}
+	private HuffmanNode makeTree( HuffmanNode l, HuffmanNode r, int sum )
+	{
+		HuffmanNode c = new HuffmanNode(r.freq+sum, makeTree(r, r.freq+sum), r);
+		return r;
+		
+	}
+	
 	public static void main(String[] args)
 	{
 		HuffmanCode c = new HuffmanCode();
@@ -46,6 +72,7 @@ public class HuffmanCode {
 		y = c.getFreq( "aba ab cabbb" );
 		for (int i = 0; i < 4; i++)	// i don't know how to print queues bruh
 			System.out.println( y.poll() );
+		
 	}
 	
 }
