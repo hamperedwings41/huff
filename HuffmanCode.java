@@ -70,9 +70,9 @@ public class HuffmanCode {
 		HuffmanCode c = new HuffmanCode();
 		Queue<HuffmanNode> y = new PriorityQueue<HuffmanNode>();
 		y = c.getFreq( "aba ab cabbb" );
-		for (int i = 0; i < 4; i++)	// i don't know how to print queues bruh
-			System.out.println( y.poll() );
-		
+	//	for (int i = 0; i < 4; i++)	// i don't know how to print queues bruh
+	//		System.out.println( y.poll() );
+		System.out.println( c.makeTree( y ) );
 	}
 	
 }
