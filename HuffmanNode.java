@@ -8,7 +8,7 @@ public class HuffmanNode implements Comparable<HuffmanNode>
 	HuffmanNode right;
 	String s;
 	
-	public HuffmanNode( char c, int f, HuffmanNode l, HuffmanNode r)
+	public HuffmanNode( char c, int f, HuffmanNode l, HuffmanNode r )
 	{
 		cha = c;
 		freq = f;
@@ -16,12 +16,20 @@ public class HuffmanNode implements Comparable<HuffmanNode>
 		right = r;
 		s = Character.toString(cha);
 	}
-	public HuffmanNode( int f, HuffmanNode l, HuffmanNode r)
+	public HuffmanNode( int f, HuffmanNode l, HuffmanNode r )
 	{
-		cha = (Character) null;
+		cha = 0;
 		freq = f;
 		left = l;
 		right = r;
+		s = Character.toString(cha);
+	}
+	public HuffmanNode()
+	{
+		cha = 0;
+		freq = 0;
+		left = null;
+		right = null;
 		s = Character.toString(cha);
 	}
 	
@@ -36,7 +44,10 @@ public class HuffmanNode implements Comparable<HuffmanNode>
 	
 	public String toString()	// prints out in preOrder format (D, L, R)
 	{
-		return "('" + cha + "' " + freq + ") " + left + " " + right;
+		if(cha == 0)
+			return "(" + freq + ") " + left + " " + right;
+		else
+			return "('" + cha + "' " + freq + ") " + left + " " + right;
 	}
 	
 }

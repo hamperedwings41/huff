@@ -39,30 +39,54 @@ public class HuffmanCode {
 		return q;
 	}
 	
-	public HuffmanNode makeTree( Queue<HuffmanNode> q )
+//	public HuffmanNode makeTree( Queue<HuffmanNode> q )
+//	{
+//		if( !q.isEmpty() )
+//		{
+//			HuffmanNode o = q.poll();
+//			if( q.peek()==null )
+//				return makeTree( o, 0 );
+//			else
+//				return makeTree( q.poll(), o, 0 );
+//		}
+//		else
+//			return null;
+//	}
+//	private HuffmanNode makeTree( HuffmanNode r, int sum )
+//	{
+//		HuffmanNode c = new HuffmanNode(r.freq+sum, makeTree(r, r.freq+sum), r);
+//		return r;
+//		
+//	}
+//	private HuffmanNode makeTree( HuffmanNode l, HuffmanNode r, int sum )
+//	{
+//		HuffmanNode c = new HuffmanNode(r.freq+sum, makeTree(r, r.freq+sum), r);
+//		return r;
+//		
+//	}
+	
+	public HuffmanNode makeTree(Queue<HuffmanNode> q)
 	{
-		if( !q.isEmpty() )
+		while(q.size() > 1)
 		{
-			HuffmanNode o = q.poll();
-			if( q.peek()==null )
-				return makeTree( o, 0 );
-			else
-				return makeTree( q.poll(), o, 0 );
+			HuffmanNode l = null,r = null,big = new HuffmanNode();
+			
+			l = q.poll();
+			r = q.poll();
+			
+			big.freq = l.freq + r.freq;
+			
+			big.left = l;
+			big.right = r;
+			
+			big.cha = 0;
+			
+			root = big;
+			
+			q.add(big);
 		}
-		else
-			return null;
-	}
-	private HuffmanNode makeTree( HuffmanNode r, int sum )
-	{
-		HuffmanNode c = new HuffmanNode(r.freq+sum, makeTree(r, r.freq+sum), r);
-		return r;
 		
-	}
-	private HuffmanNode makeTree( HuffmanNode l, HuffmanNode r, int sum )
-	{
-		HuffmanNode c = new HuffmanNode(r.freq+sum, makeTree(r, r.freq+sum), r);
-		return r;
-		
+		return root;
 	}
 	
 	public static void main(String[] args)
