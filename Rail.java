@@ -62,22 +62,24 @@ class Rail{
 
  public static void main(String args[])throws Exception
  {
-  Rail rf=new Rail();
-                Scanner scn=new Scanner(System.in);
+  Rail a=new Rail();
+                Scanner in=new Scanner(System.in);
                 int height;
   
                 String text,cipher,d;
                 
+               
                 System.out.println("Enter plain text:");
-                text=scn.nextLine();
+                text=in.nextLine();
+                
                 
                 System.out.println("Enter height for Encryption:");
-                height=scn.nextInt();
-               
-  cipher=rf.Encryption(text,height);
+                height=in.nextInt();
+                
+  cipher=a.Encryption(text,height);
   System.out.println("Encrypted text is:\n"+cipher);
                 
-                d=rf.Decryption(cipher, height);
+                d=a.Decryption(cipher, height);
                 
   System.out.println("Decrypted text is:\n"+d);
   
