@@ -26,6 +26,12 @@ public class HuffmanNode implements Comparable<HuffmanNode>
 		s = Character.toString(cha);
 	}
 	
+	public Boolean isLeaf() {
+		if(left == null && right == null)
+			return true;
+		
+		return false;
+	}
 	
 	public int compareTo( HuffmanNode other )
 	{
@@ -38,7 +44,7 @@ public class HuffmanNode implements Comparable<HuffmanNode>
 	
 	public String toString()	// prints out in preOrder format (D, L, R)
 	{
-		return "\n" + left + " ('" + cha + "' " + freq + ") \n" + right + " ";
+		return "('" + cha + "' " + freq + ")" + "\n	-LEFT- " + left + " -RIGHT- " + right + "\n";
 	}
 	
 }

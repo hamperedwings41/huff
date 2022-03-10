@@ -74,6 +74,57 @@ public class HuffmanCode {
 		}
 	}
 	
+	
+	
+	private String getBinary(char x) {
+		if(root == null)
+			return "";
+		return getBinary("", root, x);
+	}
+	
+	private String getBinary(String r, HuffmanNode n, char x) {
+		System.out.println(r + "	| " + n.cha + " | " + x);
+		
+		if(n == null)
+			return "";
+		if(!n.isLeaf()) {
+			return getBinary(r + "0", n.left, x) + getBinary(r + "1", n.right, x); 
+		}
+		if(n.isLeaf() && n.cha == x)
+			return r;
+		return "";	
+	}
+	
+	public String encode(String x) {
+		String str = "";
+		
+		for(char c : str.toCharArray())
+			str += getBinary(c);
+		
+		return str;
+	}
+	
+	public String decode(String bin) {
+		String r = "";                                                                                                                                                                                                                                ;
+		HuffmanNode temp = root;
+		
+		for(int i = 0; i < bin.length(); i++) {
+			System.out.print(bin.substring(i,i+1) + " ");
+			
+			if(temp.isLeaf()) {
+				r += temp.cha;
+				temp = root;
+			}
+			
+			if(bin.substring(i,i+1).equals("0"))
+				temp = temp.left;
+			if(bin.substring(i,i+1).equals("1"))
+				temp = temp.right;
+		}
+		
+		return r == "" ? "Nothing" : r;
+	}
+	
 	public static void main(String[] args)
 	{
 		HuffmanCode c = new HuffmanCode();
@@ -81,10 +132,9 @@ public class HuffmanCode {
 		y = c.getFreq( "aba ab cabbb" );
 		HuffmanNode root = c.tree(y);
 		
-		for (HuffmanNode n : y)	// i don't know how to print queues bruh
-			System.out.println(n);
-		
-		c.preorder();
+		System.out.println("\nBinary of a: " + c.getBinary('a'));
+		System.out.println("\nBinary of b: " + c.getBinary('b'));
+		System.out.println(c.decode("110"));
 		
 	}
 	
