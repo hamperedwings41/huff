@@ -16,13 +16,21 @@ public class HuffmanNode implements Comparable<HuffmanNode>
 		right = r;
 		s = Character.toString(cha);
 	}
-	public HuffmanNode( int f, HuffmanNode l, HuffmanNode r)
+	
+	public HuffmanNode()
 	{
-		cha = (Character) null;
-		freq = f;
-		left = l;
-		right = r;
+		cha = 0;
+		freq = 0;
+		left = null;
+		right = null;
 		s = Character.toString(cha);
+	}
+	
+	public Boolean isLeaf() {
+		if(left == null && right == null)
+			return true;
+		
+		return false;
 	}
 	
 	public int compareTo( HuffmanNode other )
@@ -36,7 +44,7 @@ public class HuffmanNode implements Comparable<HuffmanNode>
 	
 	public String toString()	// prints out in preOrder format (D, L, R)
 	{
-		return "('" + cha + "' " + freq + ") " + left + " " + right;
+		return "('" + cha + "' " + freq + ")" + "\n	-LEFT- " + left + " -RIGHT- " + right + "\n";
 	}
 	
 }

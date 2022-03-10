@@ -39,40 +39,106 @@ public class HuffmanCode {
 		return q;
 	}
 	
-	public HuffmanNode makeTree( Queue<HuffmanNode> q )
-	{
-		if( !q.isEmpty() )
-		{
-			HuffmanNode o = q.poll();
-			if( q.peek()==null )
-				return makeTree( o, 0 );
-			else
-				return makeTree( q.poll(), o, 0 );
+	public HuffmanNode tree(Queue<HuffmanNode> q) {
+		while(q.size() > 1) {
+			HuffmanNode l = null,r = null,big = new HuffmanNode();
+			
+			l = q.poll();
+			r = q.poll();
+			
+			big.freq = l.freq + r.freq;
+			
+			big.left = l;
+			big.right = r;
+			
+			big.cha = 0;
+			
+			root = big;
+			
+			q.add(big);
 		}
-		else
-			return null;
-	}
-	private HuffmanNode makeTree( HuffmanNode r, int sum )
-	{
-		HuffmanNode c = new HuffmanNode(r.freq+sum, makeTree(r, r.freq+sum), r);
-		return r;
 		
+		return root;
 	}
-	private HuffmanNode makeTree( HuffmanNode l, HuffmanNode r, int sum )
-	{
-		HuffmanNode c = new HuffmanNode(r.freq+sum, makeTree(r, r.freq+sum), r);
-		return r;
+	
+	public void preorder() {
+		preorder(root);
+	}
+	
+	private void preorder(HuffmanNode n) {
+		if(n != null) {
+			
+			preorder(n.left);
+			System.out.print(n.freq + " ");
+			preorder(n.right);
+		}
+	}
+	
+	
+	
+	private String getBinary(char x) {
+		if(root == null)
+			return "";
+		return getBinary("", root, x);
+	}
+	
+	private String getBinary(String r, HuffmanNode n, char x) {
+		System.out.println(r + "	| " + n.cha + " | " + n.freq + " | " + x);
 		
+		if(n == null)
+			return "";
+		if(!n.isLeaf()) {
+			return getBinary(r + "0", n.left, x) + getBinary(r + "1", n.right, x); 
+		}
+		if(n.isLeaf() && n.cha == x)
+			return r;
+		return "";	
+	}
+	
+	public String encode(String x) {
+		String str = "";
+		
+		for(char c : x.toCharArray()) {
+			str += getBinary(c);
+		}
+		
+		return str;
+	}
+	
+	public String decode(String bin) {
+		String r = "";                                                                                                                                                                                                                                ;
+		HuffmanNode temp = root;
+		
+		for(int i = 0; i < bin.length(); i++) {
+			if(bin.substring(i,i+1).equals("0"))
+				temp = temp.left;
+			if(bin.substring(i,i+1).equals("1"))
+				temp = temp.right;
+			
+			if(temp.isLeaf()) {
+				r += temp.cha;
+				temp = root;
+			}
+		}
+		
+		return r == "" ? "Nothing" : r;
 	}
 	
 	public static void main(String[] args)
 	{
+		String code = "aba ab cabbb";
 		HuffmanCode c = new HuffmanCode();
 		Queue<HuffmanNode> y = new PriorityQueue<HuffmanNode>();
-		y = c.getFreq( "aba ab cabbb" );
-	//	for (int i = 0; i < 4; i++)	// i don't know how to print queues bruh
-	//		System.out.println( y.poll() );
-		System.out.println( c.makeTree( y ) );
+		y = c.getFreq( code );
+		HuffmanNode root = c.tree(y);
+		
+		System.out.println("\nBinary of a: " + c.getBinary('a'));
+		System.out.println("\nBinary of b: " + c.getBinary('b'));
+		
+		String enc = c.encode(code);
+		System.out.println("enc: " + enc);
+		System.out.println(c.decode(enc));
+		
 	}
 	
 }
