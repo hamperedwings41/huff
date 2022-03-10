@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 public class HuffmanCode {
@@ -124,20 +126,24 @@ public class HuffmanCode {
 		return r == "" ? "Nothing" : r;
 	}
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws FileNotFoundException
 	{
-		String code = "aba ab cabbb";
+		Scanner s = new Scanner(new File("hamlet.txt"));
+		String hamlet = "";
+		
 		HuffmanCode c = new HuffmanCode();
-		Queue<HuffmanNode> y = new PriorityQueue<HuffmanNode>();
-		y = c.getFreq( code );
-		HuffmanNode root = c.tree(y);
 		
-		System.out.println("\nBinary of a: " + c.getBinary('a'));
-		System.out.println("\nBinary of b: " + c.getBinary('b'));
+		while(s.hasNext()){
+			hamlet += s.nextLine();
+		}
 		
-		String enc = c.encode(code);
-		System.out.println("enc: " + enc);
-		System.out.println(c.decode(enc));
+		Queue<HuffmanNode> q = c.getFreq(hamlet);
+		HuffmanNode root = c.tree(q);
+		
+		String x = c.encode(hamlet);
+		
+		System.out.println("\n\n\n\n ENDCODED: " + x);
+		System.out.println("\n\n\n\n DECODED: " + c.decode(x));
 		
 	}
 	
